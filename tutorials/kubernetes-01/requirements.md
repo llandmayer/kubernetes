@@ -1,13 +1,13 @@
 # Requirements
 
-##Install kind
-###Linux
+## Install kind
+### Linux
 ```bash
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
-###Mac
+### Mac
 ```bash
 brew install kind
 ```
@@ -15,8 +15,8 @@ brew install kind
 for mor details on how to install it: https://kind.sigs.k8s.io/docs/user/quick-start/#installation
 
 
-##Install kubectl
-###Linux
+## Install kubectl
+### Linux
 ```bash
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl
@@ -26,7 +26,7 @@ sudo apt-get update
 sudo apt-get install -y kubectl
 ```
 
-###Mac
+### Mac
 ```bash
 brew install kubectl
 ```
