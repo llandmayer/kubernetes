@@ -1,5 +1,9 @@
 # Requirements
 
+## Install docker
+### Linux and Mac
+follow the instruction in the docker website https://docs.docker.com/get-docker/
+
 ## Install kind
 ### Linux
 ```bash
