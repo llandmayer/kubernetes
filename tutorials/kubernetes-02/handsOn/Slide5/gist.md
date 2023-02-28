@@ -111,6 +111,7 @@ Uncordon the node to allow new pods to be scheduled there again.
 kubectl uncordon <node name>
 ```
 
-Clean Up
-Delete the deployment created for this lesson.
-kubectl delete deployment my-deployment
+Let's Clean Up, run:
+```bash
+minikube node delete
+```
