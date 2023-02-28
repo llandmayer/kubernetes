@@ -71,3 +71,15 @@ Delete a pod.
 ```
 kubectl delete pod my-pod
 ```
+
+## Bonus
+You can also use the following command to list all available api-endpoint in your cluster.
+If you ever need to extend your kubernetes api, you'll be able to see the extensions there as well.
+```
+kubectl api-resources
+```
+
+Also the following command might be helpful to find specific specs in individual Objects.
+```
+kubectl explain <object_name>.<field>.<what_ever>
+```
