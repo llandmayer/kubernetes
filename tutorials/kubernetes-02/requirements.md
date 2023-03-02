@@ -4,20 +4,8 @@
 ### Linux and Mac
 follow the instruction in the docker website https://docs.docker.com/get-docker/
 
-## Install kind
-### Linux
-```bash
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
-```
-### Mac
-```bash
-brew install kind
-```
-
-for mor details on how to install it: https://kind.sigs.k8s.io/docs/user/quick-start/#installation
-
+## Install minikube
+https://minikube.sigs.k8s.io/docs/start/
 
 ## Install kubectl
 ### Linux
