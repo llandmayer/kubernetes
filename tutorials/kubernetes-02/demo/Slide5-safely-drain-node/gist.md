@@ -64,24 +64,24 @@ vim deployment.yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: my-deployment
-    labels:
-        app: my-deployment
+  name: my-deployment
+  labels:
+    app: my-deployment
 spec:
-    replicas: 2
-    selector:
-        matchLabels:
-            app: my-deployment
-    template:
-        metadata:
-        labels:
-            app: my-deployment
-        spec:
-            containers:
-            - name: nginx
-            image: nginx:1.14.2
-            ports:
-            - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+        app: my-deployment
+  template:
+    metadata:
+      labels:
+        app: my-deployment
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
 ```
 
 ```bash
