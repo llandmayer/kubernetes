@@ -1,11 +1,15 @@
 # Requirements
 - minikube
-- k9s
 - kubectl
-- vscode with kuberentes yaml extension
 - docker
-- helm (we'll go through it in the workshop as well.)
+- helm (we'll also go through it in the workshop.)
 
+## Optional
+- k9s
+- VScode with the following extensions:
+  - Kubernetes
+  - Kubernetes Support
+  - Kubernetes Templates
 # Shifting things to helm
 ## But first what is helm?
 Helm is a package manager for Kubernetes that helps automate the deployment, configuration, and management of applications. Helm uses charts to define the structure of the Kubernetes resources that make up an application.
