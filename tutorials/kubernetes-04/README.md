@@ -214,14 +214,38 @@ image:
   name: my-registry/my-app
   tag: 1.0.0
 ```
+## Step 6: Verify and package
+Verify our chart is OK, run the following:
+```perl
+helm lint ./myapp
+```
+That doesn't mean you yaml syntax is alright it only checks templating syntax and very specific thing to helm.
+```
+# You can also run test on your template passing variables.
+helm lint ./myapp -f values.yaml
+```
 
-## Step 6: Install the Helm chart
+If you also want to check if the output of helm is all good, you must run the following:
+```perl
+helm template my-app ./myapp|kubeval --strict
+```
+
+If everything is OK, let's package it.
+```perl
+helm package ./myapp
+```
+That will generate a tgz file that you can push to your registry.
+
+## Step 7: Install the Helm chart
 ```
 helm install my-app ./my-app
 ```
 
 ## How to improve you templates?
-[Template Function List](https://helm.sh/docs/chart_template_guide/function_list/)
-[Template Functions and Pipelines](https://helm.sh/docs/chart_template_guide/functions_and_pipelines/)
+- [Template Function List](https://helm.sh/docs/chart_template_guide/function_list/)
+- [Template Functions and Pipelines](https://helm.sh/docs/chart_template_guide/functions_and_pipelines/)
 
 \****I strongly recommend using chatGPT and google to build you helm charts.**
+
+# Mind Map when creating a helm chart.
+![image info](./pictures/helm-map.png)
