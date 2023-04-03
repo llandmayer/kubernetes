@@ -5,10 +5,10 @@
 - vscode with kuberentes yaml extension
 - docker
 
-# Create your onw stuff
+# Create your own stuff
 
 Lets create an app that can connect to a database and read you neighboards apis
-This application needs to be production ready, for that reason we'll take all the precotions to make sure it's resilient and scalable.
+This application needs to be production ready, for that reason we'll take all the precautions to make sure it's resilient and scalable.
 ## **Command Tips:**
 ```bash
   create deployment: kubectl create  deployment <deployment_name> --image=<image> --port=5000 --replicas=33 --dry-run=client -oyaml
@@ -41,11 +41,11 @@ This application needs to be production ready, for that reason we'll take all th
 
 ### Resource managment
 Let's add resource managment to make sure the application doesn't use up all the resources in our cluster.
-- Requests cpu: 100m memoery: 100Mi
-- Limit cpu: 200 memoery: 200Mi
+- Requests cpu: 100m memory: 100Mi
+- Limit cpu: 200 memory: 200Mi
 
 ### Expose the app
-- Create the app using Service object remeber to use selector
+- Create the app using Service object remember to use selector
 - Make sure the service is using the type nodePort
 - tip: use the `kubectl expose` command to create the service and with dry-run put that into code.
 - now to check if the app is running. Use `kubectl port forward` or `minikube service <your_service_name> --url`. This will expose your service so you can access from outside of the cluster.
@@ -93,7 +93,7 @@ Check if metrics are comming in. Note: It takes a bit of time to collect metrics
 ```
 kubectl top pods
 ```
-We have our application deployed lets add some load to it and Scale it out.
+We have our application deployed lets add some load to it and scale it out.
 ```
 kubectl apply -f loadtest
 ```
