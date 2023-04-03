@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  pod-reader
+  namespace: default
+  labels:
+    app:  pod-reader
+spec:
+  selector:
+    matchLabels:
+      app: pod-reader
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  pod-reader
+    spec:
+      serviceAccountName: pod-reader
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      initContainers:
+      - name: check-db
+        image: busybox
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: pod-reader-app
+              key: db-host
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+        command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z mysql 3306; do sleep 1; printf "-"; done; echo -e "  >> MySQL DB Server has started";']
+      containers:
+      - name:  pod-reader
+        image:  landmeyer/kubernetes-tutorial-03:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthy
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: pod-reader-app
+              key: db-host
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+        ports:
+        - containerPort:  5000
+          name:  flask
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: pod-reader
+  name: pod-reader
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: pod-reader
+  type: NodePort
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pod-reader-app
+  labels:
+    app: pod-reader
+data:
+  db-host: mysql
